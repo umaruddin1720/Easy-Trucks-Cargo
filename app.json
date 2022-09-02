@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "easytrucksCargo",
+    "slug": "easytrucksCargo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier":"com.easytruckscargo",
+      "config":{
+        "googleMapsApiKey" :"AIzaSyAFIdaoOBHN_fxtTUEDSsAik_qy20p6ucc"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package":"com.easytruckscargo",
+      "config" :{
+        "googleMaps":{
+          "apiKey":"AIzaSyAFIdaoOBHN_fxtTUEDSsAik_qy20p6ucc"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
