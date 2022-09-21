@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import { colors, parameters } from "../global/styles";
 import React, { useState, useContext, useEffect } from "react";
-import { Avatar, Button, Icon } from "react-native-elements";
+import { Avatar, Icon } from "react-native-elements";
 import MapComponent from "../components/MapComponent";
 import { OriginContext, DestinationContext } from "../contexts/contexts";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-export default function RequestScreen({ navigation }) {
+export default function FinalScreen({ navigation }) {
   const { origin, dispatchOrigin } = useContext(OriginContext);
   const [userOrigin, setUserOrigin] = useState({
     latitude: origin.latitude,
@@ -46,26 +46,7 @@ export default function RequestScreen({ navigation }) {
           onPress={() => navigation.goBack()}
         />
       </View>
-      <View style={styles.view2}>
-        <View style={styles.view4}>
-          <View>
-            <TouchableOpacity>
-              <View style={styles.view6}>
-                <Button
-                  title={"From where"}
-                  onPress={() => navigation.navigate("DestinationScreen")}
-                />
-              </View>
-            </TouchableOpacity>
-            <View style={styles.view7}>
-              <Button
-                title={"Select Vechicle"}
-                onPress={() => navigation.navigate("ConfirmScreen")}
-              />
-            </View>
-          </View>
-        </View>
-      </View>
+
       <MapComponent userOrigin={userOrigin} userDestination={userDestination} />
     </View>
   );
@@ -143,8 +124,8 @@ const styles = StyleSheet.create({
 
   image1: { height: 70, width: 30, marginRight: 10, marginTop: 10 },
   view7: {
+    flexDirection: "row",
     alignItems: "center",
-    marginTop: 20,
   },
   view8: {
     marginLeft: 10,
