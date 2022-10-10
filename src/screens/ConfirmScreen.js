@@ -32,13 +32,18 @@ export default function ConfirmScreen({ navigation }) {
   const [distance, setDistance] = useState("");
   const [time, setTime] = useState("");
   const [selectCar, setSelectCar] = useState("");
+
   const [carImg, setCarImg] = useState("");
   const [carRent, setCarRent] = useState("");
   const [carNote, setCarNote] = useState("");
+  const [vehNo, setVehNo] = useState("");
+  const [riderNo, setRiderNo] = useState("");
   const [charges, setCharges] = useState();
-  var price;
 
-  console.log("selectCAr", selectCar);
+  const [finalPrice, setFinalPrice] = useState(0);
+  console.log("finalPrice", finalPrice);
+
+  console.log("selectCAr", carTypeData);
 
   const fetchApiCall = async () => {
     fetch(
@@ -49,9 +54,11 @@ export default function ConfirmScreen({ navigation }) {
         console.log("dataa", data);
         const response = data?.rows[0].elements[0].distance?.text;
         const time = data?.rows[0].elements[0].duration?.text;
-        price = data?.rows[0].elements[0].duration?.value;
-        console.log("RESPONSE", time);
-        console.log("RESPONSE", response);
+        let price = data?.rows[0].elements[0].duration?.value;
+        console.log("RESPONSE", price);
+
+        setFinalPrice(price);
+
         setDistance(response);
         setTime(time);
         return;
@@ -64,18 +71,20 @@ export default function ConfirmScreen({ navigation }) {
       <TouchableOpacity
         onPress={() => {
           setSelectCar(item.item.name);
+          setVehNo(item.item.vehicleNo);
+          setRiderNo(item.item.riderNo);
           setCarImg(item.item.image);
           setCarRent(item.item.price);
           setCarNote(item.item.note);
-          setCharges(parseInt(item.item.price) * parseInt(price));
+          setCharges(Math.floor(item.item.price * parseInt(finalPrice)));
         }}
         style={{
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           marginVertical: 5,
           borderWidth: 1,
           borderColor: "black",
-          backgroundColor: colors.grey10,
+          backgroundColor: "white",
           alignItems: "center",
           marginHorizontal: 5,
         }}
@@ -84,13 +93,28 @@ export default function ConfirmScreen({ navigation }) {
           <Image source={item.item.image} style={{ width: 80, height: 60 }} />
         </View>
 
-        <View style={{ marginRight: 60 }}>
-          <Text>{item.item.name}</Text>
-          {/* <Text>{item.item.note}</Text> */}
-          <Text>{item.item.weight}</Text>
+        <View style={{ marginRight: 40 }}>
+          <Text style={{ color: "blue", fontSize: 20 }}>{item.item.name}</Text>
+          <Text
+            style={{
+              color: "purple",
+              fontWeight: "bold",
+            }}
+          >
+            Charges {"-->"}
+          </Text>
+          <Text style={{ color: "green", fontSize: 12 }}>
+            {item.item.weight}
+          </Text>
         </View>
-        <View style={{ marginRight: 10 }}>
-          <Text>{item.item.price}</Text>
+        <View
+          style={{
+            marginRight: 10,
+          }}
+        >
+          <Text style={{ color: "purple", fontSize: 20, fontWeight: "bold" }}>
+            {Math.floor(item.item.price * parseInt(finalPrice))}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -134,7 +158,17 @@ export default function ConfirmScreen({ navigation }) {
         <SectionList
           sections={carTypeData}
           keyExtractor={(item) => item.key}
-          renderSectionHeader={({ section: { title } }) => <Text>{title}</Text>}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text
+              style={{
+                fontSize: 25,
+                color: "brown",
+                fontWeight: "bold",
+              }}
+            >
+              {title}
+            </Text>
+          )}
           renderItem={renderElement}
         />
       </View>
@@ -146,6 +180,8 @@ export default function ConfirmScreen({ navigation }) {
               vehName: selectCar,
               vehRent: carRent,
               vehnote: carNote,
+              vehno: vehNo,
+              riderno: riderNo,
               vehCharge: charges,
             });
           }}
@@ -153,7 +189,7 @@ export default function ConfirmScreen({ navigation }) {
             justifyContent: "center",
             alignItems: "center",
             borderWidth: 1,
-            backgroundColor: "black",
+            backgroundColor: "skyblue",
             width: "70%",
             height: 55,
             marginLeft: 15,
@@ -161,7 +197,7 @@ export default function ConfirmScreen({ navigation }) {
           }}
         >
           <Text style={{ color: "white", fontSize: 20 }}>
-            {selectCar.length == 0 ? "Select Vehicle  " : selectCar}
+            {selectCar.length === 0 ? "Select Vehicle" : selectCar}
           </Text>
         </TouchableOpacity>
         <Image
@@ -177,6 +213,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: parameters.statusBarHeight,
+    backgroundColor: "white",
   },
   view1: {
     position: "absolute",

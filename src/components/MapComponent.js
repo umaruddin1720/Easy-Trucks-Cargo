@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { mapStyle } from "../global/mapStyle";
+import { Icon } from "react-native-elements";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { colors, parameters } from "../global/styles";
 import MapViewDirections from "react-native-maps-directions";
@@ -44,6 +45,7 @@ export default class MapComponent extends Component {
             <MapView.Marker
               coordinate={this.props.userOrigin}
               anchor={{ x: 0.5, y: 0.5 }}
+              colors="red"
             >
               <Image
                 source={require("../../assets/location.png")}
@@ -59,7 +61,7 @@ export default class MapComponent extends Component {
             >
               <Image
                 source={require("../../assets/location.png")}
-                style={styles.markerDestination}
+                style={styles.markerOrigin2}
                 resizeMode="cover"
               />
             </MapView.Marker>
@@ -70,8 +72,9 @@ export default class MapComponent extends Component {
               origin={this.props.userOrigin}
               destination={this.props.userDestination}
               apikey="AIzaSyAFIdaoOBHN_fxtTUEDSsAik_qy20p6ucc"
-              strokeWidth={4}
-              strokeColors={colors.black}
+              strokeWidth={3}
+              strokeColor="red"
+              optimizeWaypoints={true}
             />
           )}
         </MapView>
@@ -84,11 +87,8 @@ const styles = StyleSheet.create({
   map: { height: "100%", width: "100%" },
 
   markerWrapOrigin: {
-    //  alignItems: "center",
-    // justifyContent: "center",
     width: 40,
     height: 20,
-    // marginTop:0
   },
   markerOrigin: {
     width: 16,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   markerDestination: {
     width: 16,
-    height: 16,
+    height: 20,
   },
 
   markerOrigin2: {
@@ -158,6 +158,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 2,
     zIndex: 8,
+  },
+  view7: {
+    height: 50,
+    width: 40,
+
+    marginRight: 20,
   },
 
   location: {

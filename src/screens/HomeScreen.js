@@ -15,12 +15,12 @@ import React, { useState, useRef, useEffect, Component } from "react";
 import * as Location from "expo-location";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-
 import { colors, parameters } from "../global/styles";
 import { filterData, trucksAround } from "../global/data";
 import { mapStyle } from "../global/mapStyle";
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ route, navigation }) => {
+  const myName = route.params.myName;
   const [lating, setlating] = useState({});
   const checkPermission = async () => {
     const hasPermission = await Location.requestForegroundPermissionsAsync();
@@ -64,7 +64,7 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <ScrollView bounces={false}>
         <View style={styles.home}>
-          <Text style={styles.text1}>Deliever your goods</Text>
+          <Text style={styles.text1}>Well Come {myName}</Text>
           <View style={styles.view1}>
             <View style={styles.view8}>
               <Text style={styles.text2}>
@@ -107,24 +107,7 @@ const HomeScreen = ({ navigation }) => {
             )}
           />
         </View>
-        <View style={styles.view3}>
-          <Text style={styles.text3}>Where to deliver?</Text>
-          <View style={styles.view4}>
-            <Icon
-              type="material-community"
-              name="clock-time-four"
-              color={colors.grey1}
-              size={26}
-            />
-            <Text style={{ marginLeft: 5 }}>Now</Text>
-            <Icon
-              type="material-community"
-              name="chevron-down"
-              color={colors.grey1}
-              size={26}
-            />
-          </View>
-        </View>
+
         <View style={styles.view5}>
           <View style={styles.view6}>
             <View style={styles.view7}>
