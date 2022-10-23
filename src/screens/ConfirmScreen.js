@@ -86,7 +86,7 @@ export default function ConfirmScreen({ navigation }) {
           borderColor: "black",
           backgroundColor: "white",
           alignItems: "center",
-          marginHorizontal: 5,
+          paddingHorizontal: 2,
         }}
       >
         <View>
@@ -95,6 +95,7 @@ export default function ConfirmScreen({ navigation }) {
 
         <View style={{ marginRight: 40 }}>
           <Text style={{ color: "blue", fontSize: 20 }}>{item.item.name}</Text>
+
           <Text
             style={{
               color: "purple",
@@ -103,17 +104,24 @@ export default function ConfirmScreen({ navigation }) {
           >
             Charges {"-->"}
           </Text>
+
           <Text style={{ color: "green", fontSize: 12 }}>
             {item.item.weight}
           </Text>
         </View>
         <View
           style={{
-            marginRight: 10,
+            marginRight: 5,
+
+            alignItems: "center",
+            flexDirection: "row",
           }}
         >
           <Text style={{ color: "purple", fontSize: 20, fontWeight: "bold" }}>
             {Math.floor(item.item.price * parseInt(finalPrice))}
+          </Text>
+          <Text style={{ color: "purple", fontSize: 10, fontWeight: "bold" }}>
+            {"/"}PKR
           </Text>
         </View>
       </TouchableOpacity>

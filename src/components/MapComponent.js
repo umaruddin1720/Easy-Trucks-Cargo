@@ -73,7 +73,7 @@ export default class MapComponent extends Component {
               destination={this.props.userDestination}
               apikey="AIzaSyAFIdaoOBHN_fxtTUEDSsAik_qy20p6ucc"
               strokeWidth={3}
-              strokeColor="red"
+              strokeColor="hotpink"
               optimizeWaypoints={true}
             />
           )}

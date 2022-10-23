@@ -5,12 +5,14 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { colors, parameters } from "../global/styles";
 import React, { useState, useContext, useEffect } from "react";
 import { Avatar, Icon } from "react-native-elements";
 import MapComponent from "../components/MapComponent";
 import { OriginContext, DestinationContext } from "../contexts/contexts";
+import { carTypeData } from "../global/data";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -22,13 +24,38 @@ export default function FinalScreen({ navigation }) {
     longitude: origin.longitude,
   });
   const { destination, dispatchDestination } = useContext(DestinationContext);
+
   const [userDestination, setUserDestination] = useState({
     latitude: origin.latitude,
     longitude: origin.longitude,
   });
+  const [minute, setMinute] = useState(10);
+  const [second, setSecond] = useState(60);
+
+  var timer;
+  useEffect(() => {
+    timer = setInterval(() => {
+      if (minute != 0) {
+        setSecond(second - 1);
+        if (second === 0) {
+          setMinute(minute - 1);
+          setSecond(60);
+        }
+        if (minute === 0 && second === 1) {
+          Alert.alert("Ready", "lets Ready for Trip");
+        }
+      }
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  });
 
   useEffect(() => {
-    setUserOrigin({ latitude: origin.latitude, longitude: origin.longitude });
+    setUserOrigin({
+      latitude: origin.latitude,
+      longitude: origin.longitude,
+    });
     setUserDestination({
       latitude: destination.latitude,
       longitude: destination.longitude,
@@ -47,7 +74,63 @@ export default function FinalScreen({ navigation }) {
         />
       </View>
 
-      <MapComponent userOrigin={userOrigin} userDestination={userDestination} />
+      <View>
+        <MapComponent
+          userOrigin={userOrigin}
+          userDestination={userDestination}
+        />
+        <View
+          style={{
+            bottom: 680,
+            width: "70%",
+            height: 70,
+            alignSelf: "center",
+            justifyContent: "center",
+            backgroundColor: "lightgreen",
+            alignItems: "center",
+            opacity: 0.6,
+            borderRadius: 5,
+            borderWidth: 1,
+            borderColor: "green",
+          }}
+        >
+          <Text
+            style={{ color: "darkgreen", fontWeight: "bold", fontSize: 15 }}
+          >
+            The Vehical Reached in 10 Minuts
+          </Text>
+          <Text
+            style={{ color: "darkgreen", fontWeight: "bold", fontSize: 20 }}
+          >
+            {minute}:{second}
+          </Text>
+        </View>
+        <View
+          style={{
+            width: "70%",
+            bottom: 280,
+            alignSelf: "center",
+            backgroundColor: "skyblue",
+            alignItems: "center",
+            borderWidth: 1,
+            borderRadius: 5,
+            opacity: 0.6,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 15,
+              color: "blue",
+              marginTop: 10,
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            Thank You For Using Our Easy-Cargo-Truck Service
+          </Text>
+          <Text style={{ fontSize: 10, color: "red" }}> </Text>
+        </View>
+      </View>
     </View>
   );
 }
@@ -69,6 +152,7 @@ const styles = StyleSheet.create({
 
   view1: {
     position: "absolute",
+
     top: 25,
     left: 12,
     backgroundColor: colors.white,
@@ -240,10 +324,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingBottom: 1,
   },
-
-  view17: {},
-
-  view18: {},
 
   view19: { flex: 1.7, alignItems: "flex-end" },
 
