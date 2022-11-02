@@ -108,7 +108,7 @@ const HomeScreen = ({ route, navigation }) => {
           />
         </View>
 
-        <View style={styles.view5}>
+        {/* <View style={styles.view5}>
           <View style={styles.view6}>
             <View style={styles.view7}>
               <Icon
@@ -133,8 +133,8 @@ const HomeScreen = ({ route, navigation }) => {
               size={26}
             />
           </View>
-        </View>
-        <View style={{ ...styles.view5, borderBottomWidth: 0 }}>
+        </View> */}
+        {/* <View style={{ ...styles.view5, borderBottomWidth: 0 }}>
           <View style={styles.view6}>
             <View style={styles.view7}>
               <Icon
@@ -159,9 +159,13 @@ const HomeScreen = ({ route, navigation }) => {
               size={26}
             />
           </View>
-        </View>
+        // </View> */}
         <Text style={styles.text4}>Trucks around</Text>
-        <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <View
+          style={{
+            alignItems: "center",
+          }}
+        >
           <MapView
             ref={_map}
             provider={PROVIDER_GOOGLE}
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
     paddingTop: parameters.statusBarHeight,
   },
   header: {
-    backgroundColor: colors.blue,
+    backgroundColor: "skyblue",
     height: parameters.headerHeight,
     alignItems: "flex-start",
   },
@@ -215,7 +219,7 @@ const styles = StyleSheet.create({
   },
   image2: { height: 60, width: 60, borderRadius: 30 },
   home: {
-    backgroundColor: colors.blue,
+    backgroundColor: "skyblue",
     paddingLeft: 20,
   },
   text1: {
@@ -309,7 +313,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   map: {
-    height: 150,
+    height: 250,
     marginVertical: 0,
     width: SCREEN_WIDTH * 0.92,
   },
@@ -340,5 +344,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  view9: { width: 4, height: 4, borderRadius: 2, backgroundColor: "white" },
+  view9: { width: 8, height: 4, borderRadius: 2, backgroundColor: "white" },
 });

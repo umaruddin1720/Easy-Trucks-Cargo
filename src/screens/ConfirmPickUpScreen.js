@@ -21,6 +21,7 @@ export default function ConfirmPickUpScreen({ navigation, route }) {
   const vehNo = route.params.vehno;
   const riderNo = route.params.riderno;
   const [stopcost, setStopCost] = useState(vehCharge);
+  const [count, setCount] = useState(0);
 
   const { origin, dispatchOrigin } = useContext(OriginContext);
   const [userOrigin, setUserOrigin] = useState({
@@ -91,7 +92,7 @@ export default function ConfirmPickUpScreen({ navigation, route }) {
           </Text>
           <Text style={{ fontSize: 10, color: "red" }}>{vehNo}</Text>
           <Text style={{ fontSize: 15, color: "blue", fontWeight: "bold" }}>
-            Rider No
+            Driver No
           </Text>
           <Text style={{ fontSize: 10, color: "red" }}>{riderNo}</Text>
         </View>
@@ -109,13 +110,14 @@ export default function ConfirmPickUpScreen({ navigation, route }) {
           <Text style={{ color: "green" }}>{vehNote}</Text>
         </View>
         <View>
-          <Text style={{ fontSize: 30, color: "red" }}>{stopcost}</Text>
+          <Text style={{ fontSize: 30, color: "green" }}>{stopcost}/pkr</Text>
         </View>
       </View>
       <View flexDirection="row" justifyContent="space-around">
         <TouchableOpacity
           onPress={() => {
             setStopCost((prevstate) => prevstate + 200);
+            setCount(count + 1);
           }}
           style={{
             justifyContent: "center",
@@ -124,18 +126,23 @@ export default function ConfirmPickUpScreen({ navigation, route }) {
             backgroundColor: "skyblue",
             width: "40%",
             height: 60,
-
             marginTop: 10,
           }}
         >
           <Text style={{ color: "black", fontSize: 20 }}>Add Stop</Text>
         </TouchableOpacity>
+        <View style={{ marginTop: 15, alignItems: "center" }}>
+          <Text>stops</Text>
+          <Text>{count}</Text>
+        </View>
+
         <TouchableOpacity
           onPress={() => {
             if (stopcost === vehCharge) {
               return;
             } else {
               setStopCost((prevstate) => prevstate - 200);
+              if (!count == 0) setCount(count - 1);
             }
           }}
           style={{
@@ -145,7 +152,6 @@ export default function ConfirmPickUpScreen({ navigation, route }) {
             backgroundColor: "skyblue",
             width: "40%",
             height: 60,
-
             marginTop: 10,
           }}
         >

@@ -48,7 +48,7 @@ export default class MapComponent extends Component {
               colors="red"
             >
               <Image
-                source={require("../../assets/location.png")}
+                source={require("../../assets/marker.svg.png")}
                 style={styles.markerOrigin2}
                 resizeMode="cover"
               />
@@ -60,7 +60,7 @@ export default class MapComponent extends Component {
               anchor={{ x: 0.5, y: 0.5 }}
             >
               <Image
-                source={require("../../assets/location.png")}
+                source={require("../../assets/marker.svg.png")}
                 style={styles.markerOrigin2}
                 resizeMode="cover"
               />
@@ -73,7 +73,7 @@ export default class MapComponent extends Component {
               destination={this.props.userDestination}
               apikey="AIzaSyAFIdaoOBHN_fxtTUEDSsAik_qy20p6ucc"
               strokeWidth={3}
-              strokeColor="hotpink"
+              strokeColor="red"
               optimizeWaypoints={true}
             />
           )}
@@ -116,8 +116,7 @@ const styles = StyleSheet.create({
 
   markerOrigin2: {
     width: 20,
-    height: 20,
-    borderRadius: 10,
+    height: 30,
   },
 
   car: {

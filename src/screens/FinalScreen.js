@@ -105,9 +105,12 @@ export default function FinalScreen({ navigation }) {
             {minute}:{second}
           </Text>
         </View>
-        <View
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("LoginScreen");
+          }}
           style={{
-            width: "70%",
+            width: "60%",
             bottom: 280,
             alignSelf: "center",
             backgroundColor: "skyblue",
@@ -126,10 +129,10 @@ export default function FinalScreen({ navigation }) {
               textAlign: "center",
             }}
           >
-            Thank You For Using Our Easy-Cargo-Truck Service
+            CANCEL TRIP
           </Text>
           <Text style={{ fontSize: 10, color: "red" }}> </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
